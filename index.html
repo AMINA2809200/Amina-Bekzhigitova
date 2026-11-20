@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amina Bekzhigitova — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400;0,62..125,500;0,62..125,600;0,62..125,700;0,62..125,800;0,62..125,900&display=swap" rel="stylesheet">
+<style>
+  /*
+    Layout idea: an editorial, full-bleed scroll in the language of a
+    minimal fashion e-commerce site — stark white/black, heavy condensed
+    uppercase display type, numbered sections, photography doing the
+    talking between text blocks. One typeface family, weight does the work.
+  */
+  :root {
+    --bg: #ffffff;
+    --bg-raised: #f6f6f4;
+    --ink: #0a0a0a;
+    --ink-soft: #6e6e6c;
+    --line: #dcdcd9;
+    --accent: #45521f; /* muted olive, pulled from the chair photo */
+    --font: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  }
+  :root[data-theme="dark"] {
+    --bg: #0a0a0a;
+    --bg-raised: #161614;
+    --ink: #f3f3ef;
+    --ink-soft: #a3a39c;
+    --line: #2c2c28;
+    --accent: #a9bb74;
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0a0a0a;
+      --bg-raised: #161614;
+      --ink: #f3f3ef;
+      --ink-soft: #a3a39c;
+      --line: #2c2c28;
+      --accent: #a9bb74;
+      color-scheme: dark;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  ::selection { background: var(--accent); color: #fff; }
+
+  .gutter { padding-left: 20px; padding-right: 20px; }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+
+  .cap {
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+  .idx {
+    font-weight: 700;
+    font-size: 12.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .idx::after { content: ""; height: 1px; background: var(--line); flex: 1; }
+
+  header.mast {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    font-size: 12.5px;
+    font-weight: 700;
+  }
+  header.mast .mast-name { letter-spacing: 0.1em; }
+  header.mast .mast-right { color: var(--ink-soft); font-weight: 600; letter-spacing: 0.08em; display:flex; gap:18px; }
+  header.mast a { text-decoration: none; }
+  header.mast a:hover { color: var(--accent); }
+
+  .hero {
+    position: relative;
+    height: min(92vh, 860px);
+    min-height: 460px;
+    overflow: hidden;
+  }
+  .hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 30% 20%;
+    filter: grayscale(0.55) contrast(1.08) brightness(0.98);
+  }
+  .hero .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.55) 100%);
+  }
+  .hero .hero-text {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 32px;
+    color: #fff;
+  }
+  .hero h1 {
+    font-family: var(--font);
+    font-weight: 900;
+    font-stretch: 85%;
+    font-size: clamp(2.6rem, 9vw, 6.2rem);
+    line-height: 0.92;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+  .hero p {
+    margin: 14px 0 0;
+    font-size: clamp(0.85rem, 1.6vw, 1rem);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-weight: 600;
+    max-width: 50ch;
+  }
+
+  section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 52px;
+    align-items: start;
+  }
+  .split img {
+    width: 100%;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    filter: grayscale(0.55) contrast(1.06);
+  }
+  h2.title {
+    font-weight: 800;
+    font-stretch: 85%;
+    text-transform: uppercase;
+    font-size: clamp(1.6rem, 4vw, 2.3rem);
+    line-height: 1.05;
+    margin: 0 0 18px;
+    letter-spacing: -0.005em;
+  }
+  .lead { color: var(--ink-soft); max-width: 56ch; margin: 0 0 14px; font-size: 1.02rem; }
+
+  .fullbleed { height: min(60vh, 520px); min-height: 300px; overflow: hidden; }
+  .fullbleed img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: grayscale(0.6) contrast(1.05);
+  }
+
+  .list { display: grid; }
+  .list-row {
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    align-items: baseline;
+    gap: 18px;
+    padding: 26px 0;
+    border-top: 1px solid var(--line);
+  }
+  .list-row:last-child { border-bottom: 1px solid var(--line); }
+  .list-row .n {
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+  }
+  .list-row .body h3 {
+    margin: 0 0 6px;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 1.15rem;
+    letter-spacing: 0.01em;
+  }
+  .list-row .body .meta {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .list-row .body p { margin: 0; color: var(--ink-soft); max-width: 62ch; font-size: 0.97rem; }
+  .list-row .go {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 2px;
+  }
+  .list-row .go:hover { color: var(--accent); border-color: var(--accent); }
+
+  .note-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--line);
+  }
+  .note-card .note-img { aspect-ratio: 5/4; overflow: hidden; }
+  .note-card .note-img img { width:100%; height:100%; object-fit: cover; filter: grayscale(0.7) contrast(1.05) brightness(0.9); }
+  .note-card .note-text { padding: 34px; display: flex; flex-direction: column; justify-content: center; gap: 12px; }
+  .note-card .note-text h3 { margin: 0; font-weight: 800; text-transform: uppercase; font-size: 1.3rem; }
+  .note-card .note-text p { margin: 0; color: var(--ink-soft); }
+
+  .reel-row { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .reel-item h4 {
+    margin: 0 0 8px;
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+  }
+  .reel-item p { margin: 0 0 10px; color: var(--ink-soft); font-size: 0.95rem; }
+  .reel-item a {
+    font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+    text-decoration: none; border-bottom: 1px solid var(--ink);
+  }
+  .reel-item a:hover { color: var(--accent); border-color: var(--accent); }
+
+  .tl { display: grid; gap: 0; }
+  .tl-row {
+    display: grid;
+    grid-template-columns: 130px 220px 1fr;
+    gap: 20px;
+    padding: 22px 0;
+    border-top: 1px solid var(--line);
+  }
+  .tl-row:last-child { border-bottom: 1px solid var(--line); }
+  .tl-row .when { font-size: 12px; font-weight: 700; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.08em; }
+  .tl-row .org { font-size: 13px; font-weight: 800; text-transform: uppercase; }
+  .tl-row ul { margin: 0; padding-left: 16px; color: var(--ink-soft); font-size: 0.93rem; }
+  .tl-row li { margin-bottom: 4px; }
+
+  .chiprow { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+  .chip {
+    border: 1px solid var(--line);
+    padding: 8px 14px;
+    font-size: 12.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+  }
+  .lang-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); margin-top: 28px; border: 1px solid var(--line); }
+  .lang { background: var(--bg); padding: 22px; text-align: center; }
+  .lang .lvl { font-weight: 900; font-size: 1.8rem; }
+  .lang .nm { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft); margin-top: 4px; }
+
+  footer.contact {
+    padding: 72px 0 40px;
+  }
+  footer.contact h2 {
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: clamp(2rem, 7vw, 4rem);
+    line-height: 0.95;
+    margin: 0 0 28px;
+    letter-spacing: -0.01em;
+  }
+  footer.contact .row { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; border-top: 1px solid var(--line); padding-top: 28px; }
+  footer.contact a.email {
+    font-size: 1.1rem; font-weight: 800; text-decoration: none;
+    border-bottom: 2px solid var(--ink);
+  }
+  footer.contact a.email:hover { color: var(--accent); border-color: var(--accent); }
+  footer.contact .loc { font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft); }
+
+  @media (max-width: 820px) {
+    .split, .reel-row { grid-template-columns: 1fr; gap: 28px; }
+    .note-card { grid-template-columns: 1fr; }
+    .list-row { grid-template-columns: 36px 1fr; }
+    .list-row .go { grid-column: 2; }
+    .tl-row { grid-template-columns: 1fr; gap: 6px; }
+    header.mast .mast-right { gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <span class="mast-name">AMINA BEKZHIGITOVA</span>
+  <span class="mast-right">
+    <a href="#work">WORK</a>
+    <a href="#experience">EXPERIENCE</a>
+    <a href="mailto:bek.amina2809@gmail.com">CONTACT</a>
+  </span>
+</header>
+
+<div class="hero">
+  <img src="images/hero-chair.jpg" alt="Amina Bekzhigitova">
+  <div class="hero-overlay"></div>
+  <div class="hero-text">
+    <h1>Amina<br>Bekzhigitova</h1>
+    <p>Product management · Almaty — Paris — Tours</p>
+  </div>
+</div>
+
+<div class="gutter">
+<div class="wrap">
+
+  <section id="about">
+    <div class="idx">01 — About</div>
+    <div class="split">
+      <div>
+        <h2 class="title">Business fundamentals,<br>built across three countries</h2>
+        <p class="lead">Entrepreneurship student at Almaty Management University with hands-on experience in international trade documentation, ERP systems, and cross-functional coordination. Exchange semester at IÉSEG School of Management (Lille) and a summer program at Excelia Business School (Tours &amp; Amboise).</p>
+        <p class="lead">Currently focused on product management, product discovery, and MVP development — combining business constraints with real user insight, then shipping something. I lead student teams in case competitions and startup projects.</p>
+        <div class="chiprow">
+          <span class="chip">MVP Development</span>
+          <span class="chip">Agile Fundamentals</span>
+          <span class="chip">Figma / Canva</span>
+          <span class="chip">1C ERP</span>
+        </div>
+      </div>
+      <img src="images/paris-crossing.jpg" alt="Paris, street crossing">
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="idx">02 — Selected Work</div>
+    <h2 class="title">Projects</h2>
+    <p class="lead" style="margin-bottom: 36px;">Product and consulting work from coursework and competitions — each built for a real brief, a real team, and mostly a real stakeholder on the other side.</p>
+    <div class="list">
+      <div class="list-row">
+        <div class="n">01</div>
+        <div class="body">
+          <h3>Collabster</h3>
+          <div class="meta">Startup · Product Ownership · MVP in progress</div>
+          <p>A platform for beginner creatives to find collaborators and build a portfolio, first market Kazakhstan. I act as Product Owner — shaping direction, running customer-development interviews, writing the backlog. Defended across internal university competitions.</p>
+        </div>
+        <a class="go" href="https://canva.link/o7tyv2obp9qasyg" target="_blank" rel="noopener">View deck →</a>
+      </div>
+      <div class="list-row">
+        <div class="n">02</div>
+        <div class="body">
+          <h3>Hero's Journey</h3>
+          <div class="meta">MVP Development · Course Project</div>
+          <p>A product built end-to-end for the MVP Development course — an early idea taken through to a presentable MVP, built with a team for a client brief.</p>
+        </div>
+        <a class="go" href="https://canva.link/5vcdximazmu2wvr" target="_blank" rel="noopener">View deck →</a>
+      </div>
+      <div class="list-row">
+        <div class="n">03</div>
+        <div class="body">
+          <h3>Clos de la Richardière</h3>
+          <div class="meta">Consulting · France · Family Business</div>
+          <p>Two-week summer school in Tours &amp; Amboise: our team consulted for a family-run Loire Valley winery, met the founder, developed a product for the estate, and rebuilt their website.</p>
+        </div>
+        <a class="go" href="https://canva.link/27w8hlhni5w7vx3" target="_blank" rel="noopener">View deck →</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="fullbleed" style="margin: 0 -20px; width: calc(100% + 40px);">
+    <img src="images/arc-de-triomphe.jpg" alt="Arc de Triomphe, Paris">
+  </div>
+
+  <section id="style">
+    <div class="idx">03 — A Deck That Sounds Like Me</div>
+    <div class="note-card">
+      <div class="note-img"><img src="images/hallway.jpg" alt="Interior, low light"></div>
+      <div class="note-text">
+        <h3>Kazakh Style on the World Market</h3>
+        <p>Not a formal project so much as a favorite — a first-year Critical Thinking presentation on Kazakh style reaching the global market. Included because the visual style is closer to how I actually like to present: a little more personality, a little less template.</p>
+        <a class="go" style="justify-self:start;" href="https://canva.link/xsj0j6etw16jx8k" target="_blank" rel="noopener">View deck →</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="oncamera">
+    <div class="idx">04 — Beyond The Deck</div>
+    <div class="split" style="align-items: center;">
+      <img src="images/beach.jpg" alt="Coastline, France">
+      <div>
+        <h2 class="title">On camera &amp; in community</h2>
+        <p class="lead">Signed with Riza Models in Almaty, freelancing for reels and commercial videos — and I like projects that mix that on-camera comfort with real community work.</p>
+        <div class="reel-row">
+          <div class="reel-item">
+            <h4>WeProject — street interviews</h4>
+            <p>A small, creative volunteer piece: going out and asking people questions on camera, later featured in a Digital Almaty video.</p>
+            <a href="https://www.instagram.com/reel/DFhTLp8C0G_/" target="_blank" rel="noopener">Watch →</a>
+          </div>
+          <div class="reel-item">
+            <h4>A year in France</h4>
+            <p>A video shot throughout an academic year in France, put together for the university — a personal record of the exchange, start to finish.</p>
+            <a href="https://www.instagram.com/reel/DfUtKPftW_-/" target="_blank" rel="noopener">Watch →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="fullbleed" style="margin: 0 -20px; width: calc(100% + 40px); height: min(42vh, 360px);">
+    <img src="images/bike-postbox.jpg" alt="Street scene">
+  </div>
+
+  <section id="experience">
+    <div class="idx">05 — Experience</div>
+    <div class="tl">
+      <div class="tl-row">
+        <div class="when">2023 — Present</div>
+        <div class="org">Chemal / The Say Chem / Synthie</div>
+        <ul>
+          <li>Foreign Trade Documentation Manager — prepared shipment document packages (invoices, SNT, e-invoices, SDS/MSDS) for chemicals and equipment imported into Kazakhstan.</li>
+          <li>Managed shipment records in 1C ERP; coordinated with suppliers and Russian-side partners; processed 3–5 document packages a day in 2025.</li>
+        </ul>
+      </div>
+      <div class="tl-row">
+        <div class="when">2026 — Present</div>
+        <div class="org">Riza Models &amp; Freelance</div>
+        <ul>
+          <li>Signed with Riza Models; completed a first commercial shoot.</li>
+          <li>Freelance appearances in promotional videos for local businesses, including flower shops and education brands.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="leadership">
+    <div class="idx">06 — Leadership, Activities &amp; Skills</div>
+    <div class="chiprow">
+      <span class="chip">Babson Global Challenge — Team Leader, 3rd internally</span>
+      <span class="chip">CrackIt Case Championship — Team Leader</span>
+      <span class="chip">Startup Night — Team Leader</span>
+      <span class="chip">BeWomen Forum — Volunteer Host</span>
+      <span class="chip">WeProject — Volunteer</span>
+      <span class="chip">AlmaU — Volunteer</span>
+    </div>
+    <div class="lang-grid">
+      <div class="lang"><div class="lvl">C2</div><div class="nm">Russian — Native</div></div>
+      <div class="lang"><div class="lvl">C1</div><div class="nm">English</div></div>
+      <div class="lang"><div class="lvl">A2</div><div class="nm">Kazakh</div></div>
+    </div>
+  </section>
+
+  <footer class="contact">
+    <h2>Let's talk.</h2>
+    <div class="row">
+      <a class="email" href="mailto:bek.amina2809@gmail.com">bek.amina2809@gmail.com</a>
+      <span class="loc">Almaty, Kazakhstan — Open to Product Management Internships</span>
+    </div>
+  </footer>
+
+</div>
+</div>
+
+</body>
+</html>
